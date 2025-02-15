@@ -7,6 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/", (req, res) => {
+  res.send("server works fine!");
+});
+
 app.use("/api/posts", postRoutes); // Mount routes
 
 const PORT = process.env.PORT || 5000;
