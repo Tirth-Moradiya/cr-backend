@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/posts", postRoutes); // Mount routes
+app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => {
   res.send("server works fine!");

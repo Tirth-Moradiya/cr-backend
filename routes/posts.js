@@ -4,7 +4,6 @@ const { Timestamp } = require("firebase-admin/firestore");
 
 const router = express.Router();
 
-// ✅ Middleware to Validate Post Data
 const validatePostData = (req, res, next) => {
   const { title, description } = req.body;
   if (!title || !description) {
@@ -15,7 +14,6 @@ const validatePostData = (req, res, next) => {
   next();
 };
 
-// ✅ Add a New Post (Equivalent to /addPost)
 router.post("/addPost", validatePostData, async (req, res) => {
   const { title, description } = req.body;
 
@@ -23,7 +21,6 @@ router.post("/addPost", validatePostData, async (req, res) => {
     const newPost = {
       title,
       description,
-      //   likes: [], // Array to store user IDs who liked the post
       timestamp: Timestamp.now(),
     };
 
@@ -36,7 +33,6 @@ router.post("/addPost", validatePostData, async (req, res) => {
   }
 });
 
-// ✅ Get All Posts (Equivalent to /getPost)
 router.get("/getPost", async (req, res) => {
   try {
     const postsSnapshot = await db
@@ -56,7 +52,6 @@ router.get("/getPost", async (req, res) => {
   }
 });
 
-// ✅ Get a Single Post by ID
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
@@ -76,7 +71,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ✅ Update a Post (Only Owner)
 router.put("/updatePost/:id", async (req, res) => {
   const { id } = req.params;
   const { title, description } = req.body;
@@ -99,7 +93,6 @@ router.put("/updatePost/:id", async (req, res) => {
   }
 });
 
-// ✅ Delete a Post (Public)
 router.delete("/deletePost/:id", async (req, res) => {
   const { id } = req.params;
 
